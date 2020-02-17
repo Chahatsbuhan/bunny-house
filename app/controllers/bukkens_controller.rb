@@ -36,6 +36,13 @@ end
     @bukken = Bukken.find(params[:id])
   end
 
+  def destroy
+    @bukken = Bukken.find(params[:id])
+    @bukken.destroy
+    flash[:notice] = "Bukken was successfully deleted"
+    redirect_to bukkens_path
+  end
+
   private
     def bukken_params
       params.require(:bukken).permit(:title, :description)
