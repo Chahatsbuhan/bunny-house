@@ -1,0 +1,20 @@
+<h1>Listing all bukkens</h1>
+<p>
+  <%= link_to "Create new bukken", new_bukken_path %>
+</p>
+<table>
+ <tr>
+   <th>Title</th>
+   <th>Description</th>
+ </tr>
+
+   <% @bukkens.each do |bukken| %>
+   <tr>
+     <td><%= bukken.title %></td>
+     <td><%= bukken.description %></td>
+     <td><%= link_to 'Edit', edit_bukken_path(bukken) %></td>
+     <td><%= link_to 'Show', bukken_path(bukken) %></td>
+
+   </tr>
+   <% end %>
+</table>

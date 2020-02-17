@@ -1,6 +1,15 @@
 class BukkensController < ApplicationController
+
+  def index
+    @bukkens = Bukken.all
+  end
+
   def new
     @bukken = Bukken.new
+  end
+
+  def edit
+    @bukken = Bukken.find(params[:id])
   end
 
   def create
@@ -13,6 +22,16 @@ class BukkensController < ApplicationController
     end
   end
 
+  def update
+    @bukken = Bukken.find(params[:id])
+    if @bukken.update(bukken_params)
+      flash[:notice] = "Bukken was successfully updated"
+      redirect_to bukken_path(@bukken)
+    else
+      render 'edit'
+  end
+end
+
   def show
     @bukken = Bukken.find(params[:id])
   end
@@ -21,5 +40,4 @@ class BukkensController < ApplicationController
     def bukken_params
       params.require(:bukken).permit(:title, :description)
     end
-
-end
+  end
