@@ -4,10 +4,17 @@ class BukkensController < ApplicationController
   end
 
   def create
-    #render plain: params[:bukken].inspect
     @bukken = Bukken.new(bukken_params)
-    @bukken.save
-    redirect_to bukken_show(bukken)
+    if @bukken.save
+      flash[:notice] = "Bukken was successfully created"
+      redirect_to bukken_path(@bukken)
+    else
+      render :new
+    end
+  end
+
+  def show
+    @bukken = Bukken.find(params[:id])
   end
 
   private
