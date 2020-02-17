@@ -1,4 +1,5 @@
 class BukkensController < ApplicationController
+  before_action :set_bukken, only: [:edit, :update, :show, :destroy]
 
   def index
     @bukkens = Bukken.all
@@ -9,7 +10,7 @@ class BukkensController < ApplicationController
   end
 
   def edit
-    @bukken = Bukken.find(params[:id])
+
   end
 
   def create
@@ -23,7 +24,7 @@ class BukkensController < ApplicationController
   end
 
   def update
-    @bukken = Bukken.find(params[:id])
+
     if @bukken.update(bukken_params)
       flash[:notice] = "Bukken was successfully updated"
       redirect_to bukken_path(@bukken)
@@ -33,17 +34,21 @@ class BukkensController < ApplicationController
 end
 
   def show
-    @bukken = Bukken.find(params[:id])
+
   end
 
   def destroy
-    @bukken = Bukken.find(params[:id])
+
     @bukken.destroy
     flash[:notice] = "Bukken was successfully deleted"
     redirect_to bukkens_path
   end
 
   private
+    def set_bukken
+      @bukken = Bukken.find(params[:id])
+    end
+
     def bukken_params
       params.require(:bukken).permit(:title, :description)
     end
