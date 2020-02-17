@@ -16,7 +16,7 @@ class BukkensController < ApplicationController
   def create
     @bukken = Bukken.new(bukken_params)
     if @bukken.save
-      flash[:notice] = "Bukken was successfully created"
+      flash[:success] = "Bukken was successfully created"
       redirect_to bukken_path(@bukken)
     else
       render :new
@@ -26,7 +26,7 @@ class BukkensController < ApplicationController
   def update
 
     if @bukken.update(bukken_params)
-      flash[:notice] = "Bukken was successfully updated"
+      flash[:success] = "Bukken was successfully updated"
       redirect_to bukken_path(@bukken)
     else
       render 'edit'
@@ -40,7 +40,7 @@ end
   def destroy
 
     @bukken.destroy
-    flash[:notice] = "Bukken was successfully deleted"
+    flash[:danger] = "Bukken was successfully deleted"
     redirect_to bukkens_path
   end
 
