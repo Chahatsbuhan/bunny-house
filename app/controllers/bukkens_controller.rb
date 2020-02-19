@@ -15,6 +15,7 @@ class BukkensController < ApplicationController
 
   def create
     @bukken = Bukken.new(bukken_params)
+    @bukken.user = User.first
     if @bukken.save
       flash[:success] = "Bukken was successfully created"
       redirect_to bukken_path(@bukken)
