@@ -1,8 +1,10 @@
 class BukkensController < ApplicationController
   before_action :set_bukken, only: [:edit, :update, :show, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
-    @bukkens = Bukken.all
+    @bukkens = Bukken.paginate(page: params[:page], per_page: 100)
   end
 
   def new
@@ -53,4 +55,12 @@ end
     def bukken_params
       params.require(:bukken).permit(:title, :description)
     end
+
+    def require_same_user
+      if current_user != @bukken.user #This sets it so that a logged in user can only edit his own bukkens
+        flash[:danger] = "you can only edit or delete your own bukkens"
+        redirect_to root_path
+      end
+    end
+
   end
