@@ -57,7 +57,7 @@ end
     end
 
     def require_same_user
-      if current_user != @bukken.user #This sets it so that a logged in user can only edit his own bukkens
+      if current_user != @bukken.user and !current_user.admin? #This sets it so that a logged in user can only edit his own bukkens
         flash[:danger] = "you can only edit or delete your own bukkens"
         redirect_to root_path
       end
