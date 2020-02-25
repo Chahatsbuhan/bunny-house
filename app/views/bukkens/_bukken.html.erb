@@ -13,6 +13,9 @@
                     last updated: <%= time_ago_in_words(bukken.updated_at) %></small>
           </div>
         </div>
+        <% if bukken.categories.any? %>
+          <p>Categories: <%= render bukken.categories %></p>
+        <% end %>
         <% if logged_in? && (current_user == bukken.user || current_user.admin?) %>
           <div class="bukken-actions">
             <%= link_to "Edit this bukken", edit_bukken_path(bukken), class: "btn btn-xs btn-primary" %>

@@ -20,7 +20,8 @@ class CategoriesController < ApplicationController
   end
 
   def show
-
+    @category = Category.find(params[:id])
+    @category_bukkens = @category.bukkens.paginate(page: params[:page], per_page: 100)
   end
   private
   def category_params

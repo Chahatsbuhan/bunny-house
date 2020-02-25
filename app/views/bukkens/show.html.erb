@@ -19,6 +19,9 @@
   <h4 class="center description"><strong>Description:</strong></h4>
   <hr>
   <%= simple_format(@bukken.description) %>
+  <% if @bukken.categories.any? %>
+    <p>Categories: <%= render @bukken.categories %></p>
+  <% end %>
   <div class="bukken-actions">
     <% if logged_in? && (current_user == @bukken.user || current_user.admin?)%>
       <%= link_to "Edit this bukken", edit_bukken_path(@bukken), class: "btn btn-xs btn-primary" %>

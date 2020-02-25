@@ -53,7 +53,7 @@ end
     end
 
     def bukken_params
-      params.require(:bukken).permit(:title, :description)
+      params.require(:bukken).permit(:title, :description, category_ids: [])
     end
 
     def require_same_user
